@@ -2,7 +2,7 @@
 #include <dt-bindings/zmk/keys.h>
 
 / {
-    /* ホールドタップの挙動設定（ホーム行モディファイア用） */
+    /* ホールドタップの挙動設定 */
     behaviors {
         hm: home_row_mods {
             compatible = "zmk,behavior-hold-tap";
@@ -24,7 +24,7 @@
         };
     };
 
-    /* コンボ設定：デフォルト、レイヤー2、数字レイヤー(0, 1, 2)で有効 */
+    /* コンボ設定：デフォルト(0)、レイヤー2(2)、数字レイヤー(1)で有効 */
     combos {
         compatible = "zmk,combos";
         combo_caps {
@@ -59,11 +59,11 @@
         };
     };
 
-    /* 条件付きレイヤー：37と38（インデックス36, 37）同時押しでLayer 4へ */
+    /* 条件付きレイヤー：37と38（親指中央と右）同時押しでファンクションレイヤーへ */
     conditional_layers {
         compatible = "zmk,conditional-layers";
         tri_layer {
-            if-layers = <2 1>;
+            if-layers = <1 2>;
             then-layer = <4>;
         };
     };
@@ -75,37 +75,37 @@
         default_layer {
             bindings = <
                 &kp J        &kp R         &kp I         &kp U        &kp S          &kp Y     &none &none &none &none &none &none
-                &hm LGUI H   &hm LSHIFT T  &hm LCTRL O   &hm LALT A   &hm LSHIFT N   &kp K     &none &none &none &none &none &none
+                &hm LGUI H   &hm LSHIFT T  &hm LALT O    &hm LCTRL A  &hm LSHIFT N   &kp K     &none &none &none &none &none &none
                 &kp B        &kp D         &kp W         &kp E        &kp M          &kp G     &none &none &none &none &none &none
-                &lt_p 3 RET  &lt_p 2 SPACE &lt_p 1 BSPC  &none        &none
+                &lt_p 3 RET  &lt_p 1 SPACE &lt_p 2 BSPC  &none        &none
             >;
         };
 
-        /* Layer 1: 数字レイヤー (37番長押し相当) */
+        /* Layer 1: 数字レイヤー (37番長押し) */
         number_layer {
             bindings = <
                 &kp SEMI     &kp COLON     &kp N7        &kp N8       &kp N9         &kp UNDER &none &none &none &none &none &none
-                &hm LGUI AT  &hm LSHIFT N0 &hm LCTRL N4  &hm LALT N5  &hm LSHIFT N6  &kp BSLH  &none &none &none &none &none &none
+                &hm LGUI AT  &hm LSHIFT N0 &hm LALT N4   &hm LCTRL N5 &hm LSHIFT N6  &kp BSLH  &none &none &none &none &none &none
                 &kp LBKT     &kp RBKT      &kp N1        &kp N2       &kp N3         &kp CARET &none &none &none &none &none &none
                 &kp RET      &kp SPACE     &kp BSPC      &none        &none
             >;
         };
 
-        /* Layer 2: レイヤー2 (38番長押し相当) */
+        /* Layer 2: レイヤー2 (38番長押し) */
         layer_2 {
             bindings = <
                 &kp Q        &kp R         &kp I         &kp U        &kp S          &kp C     &none &none &none &none &none &none
-                &hm LGUI P   &hm LSHIFT T  &hm LCTRL O   &hm LALT A   &hm LSHIFT N   &kp K     &none &none &none &none &none &none
+                &hm LGUI P   &hm LSHIFT T  &hm LALT O    &hm LCTRL A  &hm LSHIFT N   &kp K     &none &none &none &none &none &none
                 &kp F        &kp X         &kp V         &kp E        &kp Z          &kp L     &none &none &none &none &none &none
                 &kp RET      &kp SPACE     &kp BSPC      &none        &none
             >;
         };
 
-        /* Layer 3: 矢印レイヤー (36番長押し相当) */
+        /* Layer 3: 矢印レイヤー (36番長押し) */
         arrow_layer {
             bindings = <
                 &kp ESC      &kp HOME      &kp PG_UP     &kp UP       &kp PG_DN      &kp END   &none &none &none &none &none &none
-                &hm LGUI TAB &hm LSHIFT BSPC &hm LCTRL LEFT &hm LALT DOWN &hm LSHIFT RIGHT &kp DEL &none &none &none &none &none &none
+                &hm LGUI TAB &hm LSHIFT BSPC &kp LEFT    &kp DOWN     &kp RIGHT      &kp DEL   &none &none &none &none &none &none
                 &kp SLCK     &kp INS       &kp C_PREV    &kp C_PP     &kp C_NEXT     &kp K_APP &none &none &none &none &none &none
                 &kp RET      &kp SPACE     &kp BSPC      &none        &none
             >;
@@ -115,7 +115,7 @@
         function_layer {
             bindings = <
                 &kp C_BRI_UP &kp F12       &kp F7        &kp F8       &kp F9         &kp C_VOL_UP &none &none &none &none &none &none
-                &hm LGUI C_BRI_DN &hm LSHIFT F11 &hm LCTRL F4 &hm LALT F5 &hm LSHIFT F6 &kp C_VOL_DN &none &none &none &none &none &none
+                &hm LGUI C_BRI_DN &hm LSHIFT F11 &hm LALT F4 &hm LCTRL F5 &hm LSHIFT F6 &kp C_VOL_DN &none &none &none &none &none &none
                 &none        &kp F10       &kp F1        &kp F2       &kp F3         &kp C_MUTE   &none &none &none &none &none &none
                 &kp RET      &kp SPACE     &kp BSPC      &none        &none
             >;
