@@ -1,0 +1,14 @@
+
+if SHIELD_TORABO41_RIGHT
+
+config ZMK_KEYBOARD_NAME
+    default "torabo41"
+
+endif
+
+if SHIELD_TORABO41_LEFT || SHIELD_TORABO41_RIGHT
+
+config ZMK_SPLIT
+    default y
+
+endif
