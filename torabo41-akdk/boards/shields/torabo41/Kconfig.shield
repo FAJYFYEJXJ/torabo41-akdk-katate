@@ -1,4 +1,0 @@
-config SHIELD_TORABO41_LEFT
-    def_bool $(shields_list_contains,torabo41_left)
-config SHIELD_TORABO41_RIGHT
-    def_bool $(shields_list_contains,torabo41_right)
