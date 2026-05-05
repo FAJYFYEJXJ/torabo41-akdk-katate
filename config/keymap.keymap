@@ -47,7 +47,7 @@
             layers = <0 1 2>;
         };
         combo_slash {
-            timeout-ms = <50>;
+            timeout-ms = <30>;
             key-positions = <14 16>;
             bindings = <&kp SLASH>;
             layers = <0 1 2>;
