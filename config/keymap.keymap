@@ -1,6 +1,36 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
+/* --- JIS配列環境用定義 --- */
+#define JIS_CARET EQUAL
+#define JIS_AMPS  LS(N6)
+#define JIS_ASTRK LS(SQT)
+#define JIS_LPAR  LS(N8)
+#define JIS_RPAR  LS(N9)
+#define JIS_EQL   LS(MINUS)
+#define JIS_PLUS  LS(SEMI)
+#define JIS_LT    LS(COMMA)
+#define JIS_GT    LS(DOT)
+#define JIS_QMARK LS(SLASH)
+#define JIS_UNDR  LS(INT1)
+#define JIS_PIPE  LS(INT3)
+#define JIS_BSLH  INT3
+#define JIS_AT    LBKT
+#define JIS_LBKT  RBKT
+#define JIS_RBKT  NON_US_HASH
+#define JIS_LBRC  LS(RBKT)
+#define JIS_RBRC  LS(NON_US_HASH)
+#define JIS_COLON SQT
+#define JIS_SEMI  SEMI
+#define JIS_QUOT  LS(N7)
+#define JIS_DQUOT LS(N2)
+#define JIS_GRV   LS(LBKT)
+#define JIS_TILDE LS(EQUAL)
+#define JIS_DLLR  LS(N4)
+#define JIS_PRCNT LS(N5)
+#define JIS_EXCL  LS(N1)
+#define JIS_HASH  LS(N3)
+
 / {
     /* ホールドタップの挙動設定 */
     behaviors {
@@ -25,7 +55,7 @@
         };
     };
 
-    /* コンボ設定：デフォルト(0)、レイヤー2(2)、数字レイヤー(1)で有効 */
+    /* コンボ設定 */
     combos {
         compatible = "zmk,combos";
         combo_caps {
@@ -49,7 +79,7 @@
         combo_slash {
             timeout-ms = <30>;
             key-positions = <14 16>;
-            bindings = <&kp SLASH>;
+            bindings = <&kp JIS_QMARK>; /* JISマクロへ変更 */
             layers = <0 1 2>;
         };
         combo_minus {
@@ -60,7 +90,7 @@
         };
     };
 
-    /* 条件付きレイヤー：37と38（親指中央と右）同時押しでファンクションレイヤーへ */
+    /* 条件付きレイヤー */
     conditional_layers {
         compatible = "zmk,conditional-layers";
         tri_layer {
@@ -75,44 +105,44 @@
         /* Layer 0: デフォルトレイヤー */
         default_layer {
             bindings = <
-                &kp J        &kp R         &kp I         &kp U        &kp S          &kp Y     &none &none &none &none &none &none
-                &hm LGUI H   &hm LSHIFT T  &hm LALT O    &hm LCTRL A  &hm LSHIFT N   &kp K     &none &none &none &none &none &none
-                &kp B        &kp D         &kp W         &kp E        &kp M          &kp G     &none &none &none &none &none &none
+                &kp J        &kp R         &kp I         &kp U        &kp S          &kp Y      &none &none &none &none &none &none
+                &hm LGUI H   &hm LSHIFT T  &hm LALT O    &hm LCTRL A  &hm LSHIFT N   &kp K      &none &none &none &none &none &none
+                &kp B        &kp D         &kp W         &kp E        &kp M          &kp G      &none &none &none &none &none &none
                 &lt_p 3 RET  &lt_p 1 SPACE &lt_p 2 BSPC  &none        &none
             >;
         };
 
-        /* Layer 1: 数字レイヤー (37番長押し) */
+        /* Layer 1: 数字・記号レイヤー (JIS定義適用) */
         number_layer {
             bindings = <
-                &kp SEMI     &kp COLON     &kp N7        &kp N8       &kp N9         &kp UNDER &none &none &none &none &none &none
-                &hm LGUI AT  &hm LSHIFT N0 &hm LALT N4   &hm LCTRL N5 &hm LSHIFT N6  &kp BSLH  &none &none &none &none &none &none
-                &kp LBKT     &kp RBKT      &kp N1        &kp N2       &kp N3         &kp CARET &none &none &none &none &none &none
-                &kp RET      &kp SPACE     &kp BSPC      &none        &none
+                &kp JIS_SEMI    &kp JIS_COLON   &kp N7        &kp N8        &kp N9         &kp JIS_UNDR  &none &none &none &none &none &none
+                &hm LGUI JIS_AT &hm LSHIFT N0   &hm LALT N4   &hm LCTRL N5  &hm LSHIFT N6  &kp JIS_BSLH  &none &none &none &none &none &none
+                &kp JIS_LBKT    &kp JIS_RBKT    &kp N1        &kp N2        &kp N3         &kp JIS_CARET &none &none &none &none &none &none
+                &kp RET         &kp SPACE       &kp BSPC      &none         &none
             >;
         };
 
-        /* Layer 2: レイヤー2 (38番長押し) */
+        /* Layer 2: レイヤー2 */
         layer_2 {
             bindings = <
-                &kp Q        &kp R         &kp I         &kp U        &kp S          &kp C     &none &none &none &none &none &none
-                &hm LGUI P   &hm LSHIFT T  &hm LALT O    &hm LCTRL A  &hm LSHIFT N   &kp K     &none &none &none &none &none &none
-                &kp F        &kp X         &kp V         &kp E        &kp Z          &kp L     &none &none &none &none &none &none
+                &kp Q        &kp R         &kp I         &kp U        &kp S          &kp C      &none &none &none &none &none &none
+                &hm LGUI P   &hm LSHIFT T  &hm LALT O    &hm LCTRL A  &hm LSHIFT N   &kp K      &none &none &none &none &none &none
+                &kp F        &kp X         &kp V         &kp E        &kp Z          &kp L      &none &none &none &none &none &none
                 &kp RET      &kp SPACE     &kp BSPC      &none        &none
             >;
         };
 
-        /* Layer 3: 矢印レイヤー (36番長押し) */
+        /* Layer 3: 矢印・システムレイヤー */
         arrow_layer {
             bindings = <
-                &kp ESC      &kp HOME      &kp PG_UP     &kp UP       &kp PG_DN      &kp END   &none &none &none &none &none &none
-                &hm LGUI TAB &hm LSHIFT BSPC &kp LEFT    &kp DOWN     &kp RIGHT      &kp DEL   &none &none &none &none &none &none
-                &kp SLCK     &kp INS       &kp C_PREV    &kp C_PP     &kp C_NEXT     &kp K_APP &none &none &none &none &none &none
+                &kp ESC      &kp HOME      &kp PG_UP     &kp UP       &kp PG_DN      &kp END    &none &none &none &none &none &none
+                &hm LGUI TAB &hm LSHIFT BSPC &kp LEFT    &kp DOWN     &kp RIGHT      &kp DEL    &none &none &none &none &none &none
+                &kp SLCK     &kp INS       &kp C_PREV    &kp C_PP     &kp C_NEXT     &kp K_APP  &none &none &none &none &none &none
                 &kp RET      &kp SPACE     &kp BSPC      &none        &none
             >;
         };
 
-        /* Layer 4: ファンクションレイヤー (37+38 同時押し) */
+        /* Layer 4: ファンクションレイヤー (1+2 同時押し) */
         function_layer {
             bindings = <
                 &kp C_BRI_UP &kp F12       &kp F7        &kp F8       &kp F9         &kp C_VOL_UP &none &none &none &none &none &none
